@@ -371,7 +371,7 @@ const CLINICAL_KNOWLEDGE_EDGES: ClinicalGraphEdge[] = [
   },
 ];
 
-export function queryClinicalGraph(pathologyTag: string): GraphTraversalResult {
+ function queryClinicalGraph(pathologyTag: string): GraphTraversalResult {  
   const normalized = (pathologyTag || "").toLowerCase();
   let rootNodeId = "PATH-RLL-PNEUMO";
   if (normalized.includes("case-2") || normalized.includes("ortho") || normalized.includes("tib")) {
