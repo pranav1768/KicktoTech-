@@ -1,0 +1,56 @@
+// Prisma Schema for RadiX Clinical Database (SQLite or PostgreSQL)
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model DicomStudy {
+  caseId            String   @id @map("case_id")
+  patientId         String   @map("patient_id")
+  patientName       String   @map("patient_name")
+  patientAgeSex     String   @map("patient_age_sex")
+  modality          String
+  sliceThickness    String   @map("slice_thickness")
+  kvp               Int
+  mas               Float
+  windowCenter      Int      @map("window_center")
+  windowWidth       Int      @map("window_width")
+  institution       String
+  accessionNumber   String   @unique @map("accession_number")
+  acquisitionDate   String   @map("acquisition_date")
+  studyDescription  String   @map("study_description")
+  seriesNumber      String   @map("series_number")
+  manufacturerModel String   @map("manufacturer_model")
+  scanImagePath     String   @map("scan_image_path")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  @@map("dicom_studies")
+}
+
+model ClinicalGraphNode {
+  nodeId        String  @id @map("node_id")
+  nodeType      String  @map("node_type")
+  label         String
+  clinicalCode  String  @map("clinical_code")
+  severity      String?
+  evidenceLevel String  @map("evidence_level")
+  citation      String
+  description   String
+
+  @@map("clinical_graph_nodes")
+}
+
+model ClinicalGraphEdge {
+  edgeId       String @id @map("edge_id")
+  sourceNodeId String @map("source_node_id")
+  targetNodeId String @map("target_node_id")
+  relationType String @map("relation_type")
+  weight       Float
+  rationale    String
+
+  @@map("clinical_graph_edges")
+}

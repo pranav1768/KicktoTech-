@@ -1,0 +1,13 @@
+{
+  "name": "radix-fullstack-monorepo",
+  "version": "2.5.0",
+  "private": true,
+  "description": "RadiX Full-Stack 3-Tier Architecture (Frontend + Backend + SQLite/PostgreSQL Database)",
+  "scripts": {
+    "install:all": "cd frontend && npm install --legacy-peer-deps && cd ../backend && npm install --legacy-peer-deps",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build"
+  }
+}
